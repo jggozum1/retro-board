@@ -3,10 +3,13 @@ import type { Channel } from 'pusher-js';
 
 let pusherInstance: PusherClient | null = null;
 
+const PUSHER_KEY = process.env.NEXT_PUBLIC_PUSHER_KEY || '451913875d982aa60662';
+const PUSHER_CLUSTER = process.env.NEXT_PUBLIC_PUSHER_CLUSTER || 'ap3';
+
 export function getPusherClient(): PusherClient {
   if (!pusherInstance) {
-    pusherInstance = new PusherClient(process.env.NEXT_PUBLIC_PUSHER_KEY!, {
-      cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
+    pusherInstance = new PusherClient(PUSHER_KEY, {
+      cluster: PUSHER_CLUSTER,
     });
   }
   return pusherInstance;
