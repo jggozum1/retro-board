@@ -1,10 +1,9 @@
 import { db } from '@/lib/db';
 import { rooms, participants, notes, votes } from '@/lib/db/schema';
 import { getSession } from '@/lib/session';
-import { eq, and } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
-import { RoomHeader } from '@/components/layout/room-header';
-import { RetroBoard } from '@/components/board/retro-board';
+import { RoomView } from '@/components/board/room-view';
 import type { Note } from '@/types';
 
 interface RoomPageProps {
@@ -43,7 +42,6 @@ export default async function RoomPage({ params }: RoomPageProps) {
     redirect(`/join?code=${code}`);
   }
 
-  // Mark which notes the user has voted on
   const votedNoteIds = new Set(userVotes.map((v) => v.noteId));
   const notesWithVoteStatus: Note[] = roomNotes.map((n) => ({
     ...n,
@@ -52,24 +50,14 @@ export default async function RoomPage({ params }: RoomPageProps) {
   }));
 
   return (
-    <div className="flex flex-col h-[calc(100vh-56px)]">
-      <RoomHeader
-        roomName={room.name}
-        roomCode={room.code}
-        roomId={room.id}
-        isAdmin={session.isAdmin}
-        participants={participantList}
-        noteCount={notesWithVoteStatus.length}
-      />
-      <div className="flex-1 p-4 overflow-hidden">
-        <RetroBoard
-          roomId={room.id}
-          roomCode={room.code}
-          participantId={session.id}
-          isAdmin={session.isAdmin}
-          initialNotes={notesWithVoteStatus}
-        />
-      </div>
-    </div>
+    <RoomView
+      roomId={room.id}
+      roomCode={room.code}
+      roomName={room.name}
+      participantId={session.id}
+      isAdmin={session.isAdmin}
+      initialParticipants={participantList}
+      initialNotes={notesWithVoteStatus}
+    />
   );
 }

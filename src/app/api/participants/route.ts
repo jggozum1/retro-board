@@ -43,6 +43,8 @@ export async function POST(request: Request) {
     await pusherServer.trigger(`room-${room.code}`, 'participant-joined', {
       id: participant.id,
       displayName: participant.displayName,
+      isAdmin: participant.isAdmin,
+      joinedAt: participant.joinedAt,
     });
 
     return Response.json({
