@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -71,7 +71,8 @@ function getRandomAlias() {
 
 export function JoinRoomForm() {
   const router = useRouter();
-  const [code, setCode] = useState('');
+  const searchParams = useSearchParams();
+  const [code, setCode] = useState(searchParams.get('code')?.toUpperCase() || '');
   const [displayName, setDisplayName] = useState('');
   const [useAlias, setUseAlias] = useState(true);
 
