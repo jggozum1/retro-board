@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Card } from '@/components/ui/card';
 import { JoinRoomForm } from '@/components/room/join-room-form';
 
@@ -12,7 +13,9 @@ export default function JoinRoomPage() {
           </p>
         </div>
         <Card className="p-6">
-          <JoinRoomForm />
+          <Suspense>
+            <JoinRoomForm />
+          </Suspense>
         </Card>
       </div>
     </div>
