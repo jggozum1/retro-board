@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-elevated: #1c1c1c;
+  --border: #2a2a2a;
+  --border-hover: #3a3a3a;
+  --accent: #00e676;
+  --accent-dim: #00c853;
+  --accent-muted: #1b5e20;
+  --text-primary: #e0e0e0;
+  --text-secondary: #9e9e9e;
+  --destructive: #ef5350;
+  --column-well: #1b5e20;
+  --column-wrong: #b71c1c;
+  --column-improve: #e65100;
+  --column-action: #1a237e;
+  --sticky-well: #2e7d32;
+  --sticky-wrong: #c62828;
+  --sticky-improve: #e65100;
+  --sticky-action: #283593;
+}
+
+.light {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --bg-elevated: #e8e8e8;
+  --border: #d4d4d4;
+  --border-hover: #b0b0b0;
+  --accent: #00c853;
+  --accent-dim: #00a844;
+  --accent-muted: #c8e6c9;
+  --text-primary: #1a1a1a;
+  --text-secondary: #5a5a5a;
+  --destructive: #d32f2f;
+  --column-well: #c8e6c9;
+  --column-wrong: #ffcdd2;
+  --column-improve: #ffe0b2;
+  --column-action: #c5cae9;
+  --sticky-well: #a5d6a7;
+  --sticky-wrong: #ef9a9a;
+  --sticky-improve: #ffcc80;
+  --sticky-action: #9fa8da;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-accent-muted: var(--accent-muted);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-destructive: var(--destructive);
+  --color-column-well: var(--column-well);
+  --color-column-wrong: var(--column-wrong);
+  --color-column-improve: var(--column-improve);
+  --color-column-action: var(--column-action);
+  --color-sticky-well: var(--sticky-well);
+  --color-sticky-wrong: var(--sticky-wrong);
+  --color-sticky-improve: var(--sticky-improve);
+  --color-sticky-action: var(--sticky-action);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Hide native scrollbar - replaced with custom indicator */
+.column-scroll {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.column-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
